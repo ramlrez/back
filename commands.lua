@@ -5,22 +5,22 @@ function checkTarget(target)
     return game.Players.LocalPlayer.Name == target
 end
 return {
-    kill = function(target)
-        if not checkTarget() then return end
+    kill = function(target,owner)
+        if not checkTarget(owner) then return end
         if not pullOwner() then return end
         pcall(function()
             game.Players.LocalPlayer.Character.Humanoid.Health = 0
         end)
     end,
-    speak = function(target, params)
-        if not checkTarget() then return end
+    speak = function(target,owner, params)
+        if not checkTarget(owner) then return end
         if not pullOwner() then return end
         pcall(function()
             game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageReques:FireServer(table.concat(params,' '), 'All')
         end)
     end,
-    bring = function(target)
-        if not checkTarget() then return end
+    bring = function(target,owner)
+        if not checkTarget(owner) then return end
         if not pullOwner() then return end
         pcall(function()
             local hrp = (pullOwner().Character:FindFirstChild('HumanoidRootPart') and pullOwner().Character:FindFirstChild('HumanoidRootPart')) or (pullOwner().Character:FindFirstChild('Torso') and pullOwner().Character:FindFirstChild('Torso'))
