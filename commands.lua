@@ -16,7 +16,7 @@ return {
         if not checkTarget(target) then return end
         if not pullOwner(owner) then return end
         pcall(function()
-            game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageReques:FireServer(table.concat(params,' '), 'All')
+            game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(table.concat(params,' '), 'All')
         end)
     end,
     bring = function(target,owner)
