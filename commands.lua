@@ -1,38 +1,33 @@
 function pullOwner(id)
     for _,v in next,game.Players:GetChildren() do
-        if v.UserId == id then return v end
+        if v.UserId == tonumber(id) then 
+            return v
+        end
     end
 end
-function checkTarget(target)
-    return game.Players.LocalPlayer.Name == target
-end
-return {
-    kick =  function(target,owner,params)
-        if not checkTarget(target) then return end
+cmds = {
+    kick =  function(owner,params)
         if not pullOwner(owner) then return end
         pcall(function()
             game.Players.LocalPlayer:Kick(table.concat(params,' '))
         end)
     end,
-    kill = function(target,owner)
-        if not checkTarget(target) then return end
+    kill = function(owner)
         if not pullOwner(owner) then return end
         pcall(function()
             game.Players.LocalPlayer.Character.Humanoid.Health = 0
         end)
     end,
-    speak = function(target,owner, params)
-        if not checkTarget(target) then return end
+    speak = function(owner, params)
         if not pullOwner(owner) then return end
         pcall(function()
             game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(table.concat(params,' '), 'All')
         end)
     end,
-    bring = function(target,owner)
-        if not checkTarget(target) then return end
+    bring = function(owner)
         if not pullOwner(owner) then return end
         pcall(function()
-            local hrp = (pullOwner(owner).Character:FindFirstChild('HumanoidRootPart') and pullOwner().Character:FindFirstChild('HumanoidRootPart')) or (pullOwner().Character:FindFirstChild('Torso') and pullOwner().Character:FindFirstChild('Torso'))
+            local hrp = (pullOwner(owner).Character:FindFirstChild('HumanoidRootPart') and pullOwner(owner).Character:FindFirstChild('HumanoidRootPart')) or (pullOwner(owner).Character:FindFirstChild('Torso') and pullOwner(owner).Character:FindFirstChild('Torso'))
             if hrp then
                 local hrp2 = (game.Players.LocalPlayer.Character.Character:FindFirstChild('HumanoidRootPart') and game.Players.LocalPlayer.Character.Character:FindFirstChild('HumanoidRootPart')) or (game.Players.LocalPlayer.Character.Character:FindFirstChild('Torso') and game.Players.LocalPlayer.Character.Character:FindFirstChild('Torso'))
                 hrp2.CFrame = hrp.CFrame
