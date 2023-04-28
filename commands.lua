@@ -29,7 +29,7 @@ return {
         pcall(function()
             local hrp = (pullOwner(owner).Character:FindFirstChild('HumanoidRootPart') and pullOwner(owner).Character:FindFirstChild('HumanoidRootPart')) or (pullOwner(owner).Character:FindFirstChild('Torso') and pullOwner(owner).Character:FindFirstChild('Torso'))
             if hrp then
-                local hrp2 = (game.Players.LocalPlayer.Character.Character:FindFirstChild('HumanoidRootPart') and game.Players.LocalPlayer.Character.Character:FindFirstChild('HumanoidRootPart')) or (game.Players.LocalPlayer.Character.Character:FindFirstChild('Torso') and game.Players.LocalPlayer.Character.Character:FindFirstChild('Torso'))
+                local hrp2 = (game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart') and game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')) or (game.Players.LocalPlayer.Character:FindFirstChild('Torso') and game.Players.LocalPlayer.Character:FindFirstChild('Torso'))
                 hrp2.CFrame = hrp.CFrame
                 return   
             end
