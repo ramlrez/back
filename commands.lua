@@ -5,7 +5,7 @@ function pullOwner(id)
         end
     end
 end
-cmds = {
+return {
     kick =  function(owner,params)
         if not pullOwner(owner) then return end
         pcall(function()
