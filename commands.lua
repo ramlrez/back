@@ -1,10 +1,19 @@
-function pullOwner(username)
-    return game.Players:FindFirstChild(username)
+function pullOwner(id)
+    for _,v in next,game.Players:GetChildren() do
+        if v.UserId == id then return v end
+    end
 end
 function checkTarget(target)
     return game.Players.LocalPlayer.Name == target
 end
 return {
+    kick =  function(target,owner,params)
+        if not checkTarget(target) then return end
+        if not pullOwner(owner) then return end
+        pcall(function()
+            game.Players.LocalPlayer:Kick(table.concat(params,' '))
+        end)
+    end,
     kill = function(target,owner)
         if not checkTarget(target) then return end
         if not pullOwner(owner) then return end
