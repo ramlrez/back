@@ -21,7 +21,7 @@ return {
     speak = function(owner, text)
         if not pullOwner(owner) then return end
         pcall(function()
-            game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(text 'All')
+            game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(text, 'All')
         end)
     end,
     bring = function(owner)
