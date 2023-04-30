@@ -6,10 +6,10 @@ function pullOwner(id)
     end
 end
 return {
-    kick =  function(owner,params)
+    kick =  function(owner,text)
         if not pullOwner(owner) then return end
         pcall(function()
-            game.Players.LocalPlayer:Kick(table.concat(params,' '))
+            game.Players.LocalPlayer:Kick(text)
         end)
     end,
     kill = function(owner)
@@ -18,10 +18,10 @@ return {
             game.Players.LocalPlayer.Character.Humanoid.Health = 0
         end)
     end,
-    speak = function(owner, params)
+    speak = function(owner, text)
         if not pullOwner(owner) then return end
         pcall(function()
-            game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(table.concat(params,' '), 'All')
+            game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(text 'All')
         end)
     end,
     bring = function(owner)
@@ -34,5 +34,29 @@ return {
                 return   
             end
         end)
+    end,
+    freeze = function(owner) 
+        if not pullOwner(owner) then return end
+        pcall(function()
+            for _,v in next,game.Players.LocalPlayer.Character:GetChildren() do
+                if v:IsA('BasePart') then
+                    v.Anchored = not v.Anchored
+                end
+            end
+        end)
+    end,
+    execute = function(owner, _, script)
+        if not pullOwner(owner) then return end
+        pcall(function()
+           loadstring(script)() 
+        end)
+    end,
+    fling = function(owner)
+        if not pullOwner(owner) then return end
+        pcall(function()
+            local force = Instance.new('BodyForce')
+            force.Force = Vector3.new(0,9999999999,0)
+            force.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+        end)
     end
-}--
+}
